@@ -27,6 +27,7 @@
 
 # Optional challenges
 
-#     The Dottie number is what's known as the fixed point of the function f(x) = cos(x). Find the fixed point of the function f(x) = x - tan(x), with a starting value of x = 2. Do you recognize this number?
+#     The Dottie number is what's known as the fixed point of the function f(x) = cos(x). Find the fixed point of the function f(x) = x - tan(x), 
+#     with a starting value of x = 2. Do you recognize this number?
 #     Find a fixed point of f(x) = 1 + 1/x (you may need to try more than one starting number). Do you recognize this number?
 #     What happens when you try to find the fixed point of f(x) = 4x(1-x), known as the logistic map, with most starting values between 0 and 1?
