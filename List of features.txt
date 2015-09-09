@@ -22,8 +22,11 @@ Ending level (2 options, collecting all apples or collecting special object)
 
 About level, there are 2 methonds in which Char can go around level and make paths in the grass.
 Method 1: http://gamesdbase.com/Media/SYSTEM/MSX/Snap/big/Mr._Do!_-_1984_-_Angel_Studios.jpg
+(Where entering tile cut as well all grass)
 
 Method 2: https://pausescreen.files.wordpress.com/2010/11/mr-do-snes.jpg
+(Where entering tile cut grass in the middle of the tile, all exits to other tile are still uncut)
+Method 2 is like tiles with corridors, on which grass have to be cut separately.
 
 Of course Method 1 will be much easier to do, buttttttt...... :D
 
