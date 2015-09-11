@@ -31,3 +31,39 @@
 #     with a starting value of x = 2. Do you recognize this number?
 #     Find a fixed point of f(x) = 1 + 1/x (you may need to try more than one starting number). Do you recognize this number?
 #     What happens when you try to find the fixed point of f(x) = 4x(1-x), known as the logistic map, with most starting values between 0 and 1?
+
+import math
+
+x = float(raw_input("Enter a number: "))
+
+# using for
+# for i in xrange(1,100):
+#     x = math.cos(x)
+
+# using while
+while x != math.cos(x):
+    x = math.cos(x)
+
+print "The Dottie Number is %f" % x
+
+x = float(raw_input("\nStarting number is x = "))
+
+while x != x - math.tan(x):
+    x = x - math.tan(x)
+
+print "The fixed point of x - tan(x) is %f" % x
+
+x = float(raw_input("\nStarting number is x = "))
+
+while x!= 1 + 1/x:
+    x = 1 + 1/x
+
+
+print "The fixed point of 1 + 1/x is %f" % x
+
+x = float(raw_input("\nStarting number is x = "))
+
+while x!= 4*x*(1-x):
+    x = 4*x*(1-x)
+
+print "The fixed point of 4x(1-x) is %f" % x
