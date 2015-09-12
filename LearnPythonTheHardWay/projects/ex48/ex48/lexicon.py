@@ -1,5 +1,5 @@
 def scan(sentence):
-    """"
+    """
     Scan through each word of a sentence and then
     turn them into lexicon tuples
     """

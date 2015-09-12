@@ -1,5 +1,6 @@
 from nose.tools import *
 from ex48 import lexicon
+from ex48.parser import *
 
 def test_directions():
     assert_equal(lexicon.scan("north"), [('direction', 'north')])
@@ -53,3 +54,10 @@ def test_errors():
     assert_equal(result, [('noun', 'bear'),
                           ('error', 'IAS'),
                           ('noun', 'princess')])
+def test_parser():
+    result = parse_sentence([('verb', 'eat'),('noun', 'honey')])
+    assert_equal(result.subject, 'player')
+    assert_equal(result.verb, 'eat')
+    assert_equal(result.object, 'honey')
+    assert_raises(ParserError, parse_sentence,[('noun', 'bla'), ('verb', 'dog')])
+
