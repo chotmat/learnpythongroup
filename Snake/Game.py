@@ -10,20 +10,24 @@ BLUE = (0, 0, 255)
 screen = pygame.display.set_mode(size)
 
 clock = pygame.time.Clock()
-
+# Constant speed of the snake
 c_speed = 10
-FPS =1
-
+FPS =10
+#Starting point and lenght
 snake_x = 400
 snake_y = 320
 snake_l = 3
-
+#Starting speed
 speed_x = -c_speed
 speed_y = 0
 
 done = False
-snake = [snake_x, snake_y, snake_x+10, snake_y, snake_x+20,snake_y] 
-
+#Position of our snake's cubes
+snake = [snake_x, snake_y, snake_x+10, snake_y, snake_x+20,snake_y]
+#Array for temporary data used to turn snake
+t_snake = [0, 0, 0, 0]
+#Is there an apple on the field?
+apple_v = False
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -45,21 +49,39 @@ while not done:
                 if speed_x != 0:
                     speed_x = 0
                     speed_y = c_speed
+
     screen.fill(BLACK)
+    #All this mess just to make him turn
     snake[0] = snake_x
     snake[1] = snake_y
-    a = snake[0]
-    b = snake[1]
-    c = snake[2]
-    d = snake[3]
+    for i in range((snake_l - 1) * 2):
+        t_snake[i] = snake[i]
+    #Let's show our snake    
     for x,y in zip(snake[0::2], snake[1::2]):                      
         pygame.draw.rect(screen, BLUE, [x, y, 10, 10])
+    #Adding some speed to change position    
     snake_x += speed_x
     snake_y += speed_y
-    snake[2] = a
-    snake[3] = b
-    snake[4] = c
-    snake[5] = d
+    #All this mess vol.2
+    for i in range((snake_l - 1) * 2):
+        snake[i+2] = t_snake[i]
+    #No apple? Let's random one
+    if apple_v == False:
+        apple_x = random.randrange(0, 800, 10)
+        apple_y = random.randrange(0, 640, 10)
+        apple_v = True
+    #And draw    
+    pygame.draw.rect(screen, GREEN, [apple_x, apple_y, 10, 10])
+    #Collect apples, set apple_v to False so we will get new one
+    #And add some lenght to our snake
+    if snake_x == apple_x and snake_y == apple_y:
+        apple_v = False
+        t_snake.append(0)
+        t_snake.append(0)
+        snake.append(snake[snake_l * 2 - 1])
+        snake.append(snake[snake_l * 2])
+        snake_l += 1
+        
     pygame.display.flip()
     clock.tick(FPS)
     
