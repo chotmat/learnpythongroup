@@ -12,7 +12,7 @@ screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
 # Constant speed of the snake
 c_speed = 10
-FPS =10
+FPS =1
 #Starting point and lenght
 snake_x = 400
 snake_y = 320
@@ -27,28 +27,33 @@ snake = [snake_x, snake_y, snake_x+10, snake_y, snake_x+20,snake_y]
 #Array for temporary data used to turn snake
 t_snake = [0, 0, 0, 0]
 #Is there an apple on the field?
+key_dis = False
 apple_v = False
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        elif event.type == pygame.KEYDOWN:
+        elif event.type == pygame.KEYDOWN and key_dis == False:
             if event.key == pygame.K_LEFT:
                 if speed_y != 0:
                     speed_x = -c_speed
                     speed_y = 0
+                    key_dis = True
             elif event.key == pygame.K_RIGHT:
                 if speed_y != 0:
                     speed_x = c_speed
                     speed_y = 0
+                    key_dis = True
             elif event.key == pygame.K_UP:
                 if speed_x != 0:
                     speed_x = 0
                     speed_y = -c_speed
+                    key_dis = True
             elif event.key == pygame.K_DOWN:
                 if speed_x != 0:
                     speed_x = 0
                     speed_y = c_speed
+                    key_dis = True
 
     screen.fill(BLACK)
     #All this mess just to make him turn
@@ -57,7 +62,7 @@ while not done:
     for i in range((snake_l - 1) * 2):
         t_snake[i] = snake[i]
     #Let's show our snake    
-    for x,y in zip(snake[0::2], snake[1::2]):                      
+    for x,y in zip(snake[0::2], snake[1::2]):                 
         pygame.draw.rect(screen, BLUE, [x, y, 10, 10])
     #Adding some speed to change position    
     snake_x += speed_x
@@ -78,12 +83,14 @@ while not done:
         apple_v = False
         t_snake.append(0)
         t_snake.append(0)
+        snake.append(snake[snake_l * 2 - 2])
         snake.append(snake[snake_l * 2 - 1])
-        snake.append(snake[snake_l * 2])
         snake_l += 1
-        
+    if key_dis == True:
+        key_dis = False
+    
     pygame.display.flip()
     clock.tick(FPS)
-    
+
 pygame.quit()
 sys.exit()
