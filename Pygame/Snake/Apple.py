@@ -8,7 +8,7 @@ class Apple(object):
         self.x = random.randrange(0, game.width - size, size)
         self.y = random.randrange(0, game.height - size, size)
         self.game = game
-        self.img = apple_img
+        self.img = APPLE_IMG
 
     def draw(self):
         self.game.display.blit(self.img, [self.x, self.y])

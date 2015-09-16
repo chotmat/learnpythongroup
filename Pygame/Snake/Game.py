@@ -11,23 +11,24 @@ class Game(object):
         pygame.display.set_caption('Snake')
         super(Game, self).__init__()
 
-    def message(self, msg, color, font=smallFont, off_set_y=0):
+    def message(self, msg, color, font=SMALL_FONT, off_set_y=0):
         screen_text = font.render(msg, True, color)
         text_width, text_height = font.size(msg)
         self.display.blit(screen_text, [(self.width - text_width)/2, (self.height - text_height)/2 + off_set_y])
 
-    def game_exit(self):
+    @staticmethod
+    def game_exit():
         pygame.quit()
         quit()
 
     # Work in progress gonna refactor it to be more simple
     def game_start(self):
-        menu_item = ["Start", "Exit"]
+        menu_item = ["Start Game", "Exit"]
         choice = 0
         while True:
-            self.message("Snake", RED, font=largeFont, off_set_y=-30)
-            self.message("Start Game", WHITE, font=smallFont, off_set_y=10)
-            self.message("Exit", WHITE, font=smallFont, off_set_y=30)
+            self.message("Snake", RED, font=LARGE_FONT, off_set_y=-30)
+            self.message(menu_item[0], WHITE, font=SMALL_FONT, off_set_y=10)
+            self.message(menu_item[1], WHITE, font=SMALL_FONT, off_set_y=30)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -43,25 +44,25 @@ class Game(object):
                         else:
                             choice -= 1
                     elif event.key == pygame.K_RETURN:
-                        if menu_item[choice] == 'Start':
+                        if menu_item[choice] == menu_item[0]:
                             self.game_loop()
-                        elif menu_item[choice] == 'Exit':
+                        elif menu_item[choice] == menu_item[1]:
                             self.game_exit()
                 if event.type == pygame.QUIT:
                     self.game_exit()
-            if menu_item[choice] == 'Start':
-                self.message("Start Game", BLUE, font=smallFont, off_set_y=10)
-            else:
-                self.message("Exit", BLUE, font=smallFont, off_set_y=30)
+            if menu_item[choice] == menu_item[0]:
+                self.message(menu_item[0], BLUE, font=SMALL_FONT, off_set_y=10)
+            elif menu_item[choice] == menu_item[1]:
+                self.message(menu_item[1], BLUE, font=SMALL_FONT, off_set_y=30)
             pygame.display.update()
-            clock.tick(10)
+            CLOCK.tick(10)
 
     def game_over(self, game_reset):
         reset = False
         while not reset:
             self.display.fill(WHITE)
-            self.message("Game over", RED, font=largeFont, off_set_y=-30)
-            self.message("Press C to play again or Q to quit", BLACK, font=smallFont, off_set_y=50)
+            self.message("Game over", RED, font=LARGE_FONT, off_set_y=-30)
+            self.message("Press C to play again or Q to quit", BLACK, font=SMALL_FONT, off_set_y=50)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -77,13 +78,13 @@ class Game(object):
     def game_loop(self):
         started = False
         turned = False
-        snake_lenght = 6
-        snake = Snake(snake_lenght, color=GREEN, game=self)
+        snake_length = 6
+        snake = Snake(snake_length, color=GREEN, game=self)
         apple = Apple(APPLE_SIZE, game=self)
 
         def game_reset():
             nonlocal snake, apple, started, turned
-            snake = Snake(snake_lenght, color=GREEN, game=self)
+            snake = Snake(snake_length, color=GREEN, game=self)
             apple = Apple(APPLE_SIZE, game=self)
             started = False
             turned = False
@@ -126,4 +127,4 @@ class Game(object):
             if snake.eat(apple):
                 apple = Apple(APPLE_SIZE, game=self)
 
-            clock.tick(FPS)
+            CLOCK.tick(FPS)

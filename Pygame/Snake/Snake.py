@@ -22,7 +22,7 @@ class Snake(object):
         self.length = length
         self.color = color
         self.game = game
-        head = pygame.transform.rotate(snake_head, 270)
+        head = pygame.transform.rotate(SNAKE_HEAD, 270)
         self.blocks = [Block(game.width / 2, game.height / 2, color, game, img=head)]
         self.speed_x = 0
         self.speed_y = 0
@@ -39,19 +39,19 @@ class Snake(object):
         if direction == 'LEFT':
             self.speed_x = -SPEED
             self.speed_y = 0
-            self.blocks[0].img = pygame.transform.rotate(snake_head, 90)
+            self.blocks[0].img = pygame.transform.rotate(SNAKE_HEAD, 90)
         elif direction == 'UP':
             self.speed_y = -SPEED
             self.speed_x = 0
-            self.blocks[0].img = snake_head
+            self.blocks[0].img = SNAKE_HEAD
         elif direction == 'RIGHT':
             self.speed_x = SPEED
             self.speed_y = 0
-            self.blocks[0].img = pygame.transform.rotate(snake_head, 270)
+            self.blocks[0].img = pygame.transform.rotate(SNAKE_HEAD, 270)
         elif direction == 'DOWN':
             self.speed_y = SPEED
             self.speed_x = 0
-            self.blocks[0].img = pygame.transform.rotate(snake_head, 180)
+            self.blocks[0].img = pygame.transform.rotate(SNAKE_HEAD, 180)
 
     def go(self):
         for i in reversed(range(1, len(self.blocks))):

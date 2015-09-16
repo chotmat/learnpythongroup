@@ -19,10 +19,10 @@ GAME_NAME = "Snake"
 PATH = os.path.dirname(os.path.abspath(__file__))
 
 pygame.font.init()
-largeFont = pygame.font.Font(PATH + '/Action_Man.ttf', 80)
-smallFont = pygame.font.Font(PATH + '/Action_Man.ttf', 20)
+LARGE_FONT = pygame.font.Font(PATH + '/font/Action_Man.ttf', 80)
+SMALL_FONT = pygame.font.Font(PATH + '/font/Action_Man.ttf', 20)
 
-snake_head = pygame.image.load(PATH + '/snake_head.png')
-apple_img = pygame.image.load(PATH + '/Apple.png')
+SNAKE_HEAD = pygame.image.load(PATH + '/img/snake_head.png')
+APPLE_IMG = pygame.image.load(PATH + '/img/Apple.png')
 
-clock = pygame.time.Clock()
+CLOCK = pygame.time.Clock()
