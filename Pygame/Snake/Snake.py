@@ -31,7 +31,8 @@ class Snake(object):
         self.direction = 'RIGHT'
         self.score = 0
         for i in range(1, length - 1):
-            self.blocks.append(Block(game.width / 2 - i * SPEED, game.height / 2, size=BLOCK_SIZE, game=game))
+            self.blocks.append(Block(game.width / 2 - i * SPEED, game.height / 2,
+                                     size=BLOCK_SIZE, game=game, color=color))
 
     def draw(self):
         for block in self.blocks:
@@ -69,7 +70,8 @@ class Snake(object):
                 apple.y <= self.blocks[0].y <= apple.y + BLOCK_SIZE) or
             (apple.x <= self.blocks[0].x + BLOCK_SIZE <= apple.x + BLOCK_SIZE and
                 apple.y <= self.blocks[0].y + BLOCK_SIZE <= apple.y + BLOCK_SIZE)):
-            self.blocks.append(Block(self.blocks[-1].x, self.blocks[-1].y, size=BLOCK_SIZE, game=self.game))
+            self.blocks.append(Block(self.blocks[-1].x, self.blocks[-1].y, size=BLOCK_SIZE,
+                                     game=self.game, color=self.color))
             self.score += 10
             return True
         else:

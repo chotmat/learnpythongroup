@@ -201,8 +201,8 @@ class Game(object):
 
             self.display.fill(WHITE)
             pygame.draw.rect(self.display, BLACK, [0, self.height, self.width, PANEL_HEIGHT])
-            self.message_left("Score: " + str(snake1.score), RED, off_set_y=self.height)
-            self.message_right("Score: " + str(snake2.score), RED, off_set_y=self.height)
+            self.message_left("Score: " + str(snake1.score), GREEN, off_set_y=self.height)
+            self.message_right("Score: " + str(snake2.score), BLUE, off_set_y=self.height)
             apple.draw()
             snake1.draw()
             snake2.draw()
