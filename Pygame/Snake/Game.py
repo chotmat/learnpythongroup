@@ -184,13 +184,13 @@ class Game(object):
     def game_loop_2p(self):
         snake_length = 6
         snake1 = Snake(snake_length, color=GREEN, game=self, name="Player 1")
-        snake2 = Snake(snake_length, color=BLUE, game=self, img=SNAKE_HEAD_2, name="Player 2")
+        snake2 = Snake(snake_length, color=BLUE, game=self, img=SNAKE_HEAD_2, name="Player 2", offset_y=20)
         apple = Apple(APPLE_SIZE, game=self)
 
         def game_reset():
             nonlocal snake1, snake2, apple
             snake1 = Snake(snake_length, color=GREEN, game=self, name="Player 1")
-            snake2 = Snake(snake_length, color=BLUE, game=self, img=SNAKE_HEAD_2, name="Player 2")
+            snake2 = Snake(snake_length, color=BLUE, game=self, img=SNAKE_HEAD_2, name="Player 2", offset_y=20)
             apple = Apple(APPLE_SIZE, game=self)
 
         while True:
