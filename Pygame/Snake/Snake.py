@@ -22,11 +22,14 @@ class Snake(object):
         self.length = length
         self.color = color
         self.game = game
+        self.turned = False
+        self.started = False
         head = pygame.transform.rotate(SNAKE_HEAD, 270)
         self.blocks = [Block(game.width / 2, game.height / 2, color, game, img=head)]
         self.speed_x = 0
         self.speed_y = 0
         self.direction = 'RIGHT'
+        self.score = 0
         for i in range(1, length - 1):
             self.blocks.append(Block(game.width / 2 - i * SPEED, game.height / 2, size=BLOCK_SIZE, game=game))
 
@@ -57,6 +60,7 @@ class Snake(object):
         for i in reversed(range(1, len(self.blocks))):
             self.blocks[i].x = self.blocks[i - 1].x
             self.blocks[i].y = self.blocks[i - 1].y
+
         self.blocks[0].x += self.speed_x
         self.blocks[0].y += self.speed_y
 
@@ -66,6 +70,7 @@ class Snake(object):
             (apple.x <= self.blocks[0].x + BLOCK_SIZE <= apple.x + BLOCK_SIZE and
                 apple.y <= self.blocks[0].y + BLOCK_SIZE <= apple.y + BLOCK_SIZE)):
             self.blocks.append(Block(self.blocks[-1].x, self.blocks[-1].y, size=BLOCK_SIZE, game=self.game))
+            self.score += 10
             return True
         else:
             return False

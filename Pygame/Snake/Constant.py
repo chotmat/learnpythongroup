@@ -1,5 +1,6 @@
-import pygame
 import os
+
+import pygame
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -9,6 +10,7 @@ BLUE = (0, 0, 255)
 
 WIDTH = 400
 HEIGHT = 300
+PANEL_HEIGHT = 20
 BLOCK_SIZE = 15
 APPLE_SIZE = 16
 SPEED = 10
