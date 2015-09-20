@@ -24,5 +24,6 @@ SMALL_FONT = pygame.font.Font('font/Action_Man.ttf', 20)
 SNAKE_HEAD_1 = pygame.image.load('img/snake_head.png')
 SNAKE_HEAD_2 = pygame.image.load('img/snake_head_2.png')
 APPLE_IMG = pygame.image.load('img/Apple.png')
+GAME_ICON = pygame.image.load('img/icon.png')
 
 CLOCK = pygame.time.Clock()

@@ -5,13 +5,19 @@ from Snake import Snake
 
 class Game(object):
     def __init__(self):
+        """Initialize the game"""
         self.width = WIDTH
         self.height = HEIGHT
         self.display = pygame.display.set_mode((WIDTH, HEIGHT + PANEL_HEIGHT))
+        pygame.display.set_icon(GAME_ICON)
         pygame.display.set_caption('Snake')
         super(Game, self).__init__()
 
     def message(self, msg, color, v_align='center', h_align='center', font=SMALL_FONT, off_set_x=0, off_set_y=0):
+        """
+        A simple message print function it you can place it on 9 place using
+        the simple align system horizontal and vertical. And also off-set it by many px you want
+        """
         mes_x = 0
         mes_y = 0
         screen_text = font.render(msg, True, color)
@@ -35,11 +41,12 @@ class Game(object):
 
     @staticmethod
     def game_exit():
+        """Exit the game"""
         pygame.quit()
         quit()
 
-    # Work in progress gonna refactor it to be more simple
     def game_start(self):
+        """A simple menu using only text"""
         menu_item = ["Start Normal Game", "2 Player Mode", "Exit"]
         choice = 0
         while True:
@@ -83,6 +90,9 @@ class Game(object):
             CLOCK.tick(10)
 
     def show_score(self, snake1, snake2, game_reset):
+        """
+        Show score on two player it also take a game_reset function to pass to game_over
+        """
         self.display.fill(WHITE)
         self.message("SCORE", RED, v_align='top', font=LARGE_FONT, off_set_y=40)
         self.message("Snake 1", snake1.color, h_align='left', font=MEDIUM_FONT)
@@ -103,7 +113,29 @@ class Game(object):
                 if event.type == pygame.QUIT:
                     self.game_exit()
 
+    def show_score(self, snake, game_reset):
+        """Show score for one player"""
+        self.display.fill(WHITE)
+        self.message("SCORE", RED, v_align='top', font=LARGE_FONT, off_set_y=40)
+        self.message(str(snake.score), snake.color, font=LARGE_FONT)
+        self.message("Press Enter to continue.", BLACK, v_align='bottom', font=MEDIUM_FONT)
+        pygame.display.update()
+
+        reset = False
+        while not reset:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        reset = self.game_over(game_reset)
+                if event.type == pygame.QUIT:
+                    self.game_exit()
+
     def game_over(self, game_reset, winner=None):
+        """
+        Show the Game Over screen, it take the game_reset function because we can't
+        define game_reset as a function of Game it need to be inside the scope of game_loop
+        so we can reset it's variable. And it also take winner as a optional parameter
+        """
         while True:
             self.display.fill(WHITE)
             if winner is None:
@@ -129,7 +161,7 @@ class Game(object):
                     self.game_exit()
 
     def game_loop(self):
-
+        """The game loop for 1 player mode"""
         snake_length = 6
         snake = Snake(snake_length, color=GREEN, game=self)
         apple = Apple(APPLE_SIZE, game=self)
@@ -162,7 +194,7 @@ class Game(object):
                         snake.turn('DOWN')
 
             if snake.hit_wall() or snake.hit_tail():
-                self.game_over(game_reset)
+                self.show_score(snake, game_reset)
 
             self.display.fill(WHITE)
             pygame.draw.rect(self.display, BLACK, [0, self.height, self.width, PANEL_HEIGHT])
@@ -182,6 +214,7 @@ class Game(object):
             CLOCK.tick(FPS)
 
     def game_loop_2p(self):
+        """Game loop for 2 player mode"""
         snake_length = 6
         snake1 = Snake(snake_length, color=GREEN, game=self, name="Player 1")
         snake2 = Snake(snake_length, color=BLUE, game=self, img=SNAKE_HEAD_2, name="Player 2", offset_y=20)
